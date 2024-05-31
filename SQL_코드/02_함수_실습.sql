@@ -140,7 +140,7 @@ WHERE DEPT_CODE = 'D5';
 
 /******* REPLACE 활용 실습 *********/
 
--- 1. 이메일 주소에서 모든 점(.) 을 하이픙(-_ 대체
+-- 1. 이메일 주소에서 모든 점(.) 을 하이픈(-) 대체
 --> EMP_ID, EMAIL, AS 수정된 이메일
 SELECT EMP_ID, EMAIL, REPLACE(EMAIL, '.', '-') AS "수정된 이메일"
 FROM EMPLOYEE;
