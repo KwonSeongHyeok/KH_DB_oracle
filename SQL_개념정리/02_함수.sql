@@ -140,24 +140,6 @@ SELECT COUNT(*) FROM EMPLOYEE WHERE PHONE IS NOT NULL;
 SELECT COUNT(PHONE) FROM EMPLOYEE;
 
 
-/*** COUNT 실습 ***/
--- 1. 전체 직원 수 조회
---> AS 총 직원 수
-SELECT COUNT(*) AS "총 직원 수" FROM EMPLOYEE;
-
--- 2. WHERE 사용해서 D9 부서 직원 수 조회
---> D9 부서 직원 수
-SELECT COUNT(*) AS "D9 부서 직원 수" FROM EMPLOYEE
-WHERE DEPT_CODE = 'D9';
-
--- 3. WHERE 활용해서 보너스 받은 직원 수
---> 보너스 받은 직원들
-SELECT COUNT(*) AS "보너스 받은 직원들" FROM EMPLOYEE
-WHERE BONUS IS NOT NULL;
-
-
-
-
 -- AVG 평균
 -- 모든 사원의 평균 급여 조회
 SELECT AVG(SALARY)
@@ -175,35 +157,67 @@ FROM EMPLOYEE;
 SELECT ROUND(AVG(SALARY))
 FROM EMPLOYEE;
 
-
-/********* AVG 평균 구하기 실습 **********/
-
--- 1. 전체 직원 평균 급여 조회
---> AS 평균급여
-SELECT AVG(SALARY) AS "평균급여" FROM EMPLOYEE;
-
--- 2. 부서별 평균 급여 조회
---> AS 부서, AS 평균급여
-SELECT  DEPT_CODE AS "부서", AVG(SALARY) AS "평균급여"
-FROM EMPLOYEE
-GROUP BY DEPT_CODE
-ORDER BY DEPT_CODE ASC;
 /*
-SELECT DEPT_CODE AS "부서", AVG(SALARY) AS "평균급여"
-사용하려면 추후 GROUP BY 를 사용해야함
-ORA-00937: not a single-group group function
-00937. 00000 -  "not a single-group group function"
-*Cause:    
-*Action:
-183행, 8열에서 오류 발생
+****** TRIM ******
+공백 관련 함수
+
+TRIM ([ [옵션] 문자열 | 컬럼명 FROM] 문자열 | 컬럼명)
+주어진 문자열의 앞쪽 | 뒤쪽 | 양쪽에 존재하는 지정된 문자열 제거
+
+-- 옵션 앞쪽 (LEADING)
+          뒤쪽 (TRAILING)
+          양쪽 (BOTH 기본값)
+*/
+
+SELECT '         점      심         ',
+            TRIM(LEADING '  ' FROM '         점      심         ') -- 앞쪽 공백 제거
+FROM DUAL;
+/*
+TRIM의 경우 문자열 1개만 가능,
+ORA-30001: trim set should have only one character
+30001. 00000 -  "trim set should have only one character"
+*Cause:    Trim set contains more or less than 1 character. This is not
+           allowed in TRIM function.
+*/
+
+-- 앞쪽 공백 제거
+SELECT '         점      심         ',
+            TRIM(LEADING ' ' FROM '         점      심         ') -- 앞쪽 공백 제거
+FROM DUAL;
+
+-- 뒤쪽 공백 제거
+SELECT '         점      심         ',
+            TRIM(TRAILING ' ' FROM '         점      심         ') -- 뒤쪽 공백 제거
+FROM DUAL;
+-- 육안 상 뒤쪽 공백 제거한 것이 보이지 않을 수 있으나 뒤 공백이 제거된 상태에서 출력
+
+-- 양쪽 공백 제거
+SELECT '         점      심         ',
+            TRIM(BOTH ' ' FROM '         점      심         ') -- 뒤쪽 공백 제거
+FROM DUAL;
+
+-- 앞쪽 뒤쪽 양쪽 공백제거 한번에 사용하기
+SELECT '         점      심         ',
+            TRIM(LEADING ' ' FROM '         점      심         '), -- 앞쪽 공백 제거
+            TRIM(TRAILING ' ' FROM '         점      심         '), -- 뒤쪽 공백 제거
+            TRIM(BOTH ' ' FROM '         점      심         ') -- 양쪽 공백 제거
+FROM DUAL;
+
+/*
+REPLACE 특정 문자열을 대체할 때 사용
+
+사용 방법
+(문자열 | 컬럼명, 찾을 문자열, 바꿀 문자열)
 
 */
 
--- 3. D5 부서의 평균 급여 조회
---> AS D5부서 평균 급여
-SELECT AVG(SALARY) AS "D5부서 평균 급여"
-FROM EMPLOYEE
-WHERE DEPT_CODE = 'D5';
+-- NATIONAL 테이블에서 한국으로 적혀있는 글자를 대한민국을 변경하기
+SELECT * FROM NATIONAL;
+
+SELECT NATIONAL_CODE, NATIONAL_NAME, REPLACE(NATIONAL_NAME, '한국', '대한민국')
+FROM NATIONAL;
+
+
 
 
 
