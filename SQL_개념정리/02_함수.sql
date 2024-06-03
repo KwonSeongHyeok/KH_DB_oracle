@@ -218,6 +218,41 @@ SELECT NATIONAL_CODE, NATIONAL_NAME, REPLACE(NATIONAL_NAME, '한국', '대한민
 FROM NATIONAL;
 
 
+-- TO_NUMBER
+/*
+Oracle sql 존재
+문자열을 숫자 데이터 형식으로 변환하는데 사용
+추후에 java int 값이 아니라 String 값으로 값이 넘어오고
+추후 변환이 필요할 때는 TO_NUMBER 사용할 일이 있을 수 있음
+*/
+-- DAUL 가상 테이블을 이용해서
+-- 단순히 문자열을 숫자로 변환하는 코드
+SELECT TO_NUMBER('12345')
+FROM DUAL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
