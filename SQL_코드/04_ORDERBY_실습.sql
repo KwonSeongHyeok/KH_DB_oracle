@@ -31,6 +31,7 @@ SELECT BONUS AS "보너스", SALARY AS "월급"
 FROM EMPLOYEE
 ORDER BY 보너스 DESC, 월급 ASC;
 --> 사람이나 어떤 값을 정렬해서 모두 보겠다 X
+---> 제일 많이 보너스 받는 값은 무엇이고, 월급 제일 낮게 받거나 높게 받는 금액 기분
 
 
 
