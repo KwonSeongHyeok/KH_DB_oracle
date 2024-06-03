@@ -57,6 +57,8 @@ ROLLBACK; -- 저장 X 돌아가기
 -- 2. UPDATE
 
 -- 테이블에 기록된 컬럼의 값을 수정하는 구문
+-- 업데이트를 사용하는 예제 : 회원정보수정(핸드폰번호, 주소, 아이디, 비밀번호 변경)
+--                                    사업자 - 상품수정(수량, 이름, 재고)
 
 -- [작성법]
 -- UPDATE 테이블명 SET 컬럼명 = 변경할 값
@@ -76,7 +78,48 @@ WHERE DEPT_ID = 'D9';
 SELECT * FROM DEPARTMENT2
 WHERE DEPT_ID = 'D9';
 
+-- 저장을 원한다면 COMMIT 작성
+-- 되돌리기 원한다면 ROLLBACK;
 
+ROLLBACK;
+
+
+-- 조건을 설정하지 않고 모든 행의 컬럼 값 변경
+-- UPDATE 테이블명 SET 컬럼명 = 변경할내용작성;
+
+-- 여러 컬럼을 한번에 수정할 경우 콤마(,)로 컬럼을 구분해서 수정
+-- D2 / 회계관리부  -> D0 / 회계관리팀
+UPDATE DEPARTMENT2
+SET DEPT_ID = 'D0', DEPT_TITLE = '회계관리팀'
+WHERE DEPT_ID = 'D2';
+
+SELECT * FROM DEPARTMENT2;
+
+
+/******
+
+삭제하기
+테이블 안에 존재하는 값들을 삭제하는 구문
+
+[작성법]
+DELETE FROM 테이블명 WHERE 조건설정;
+만약 WHRER 조건을 설정하지 않으면 모든 행이 다 삭제됨
+
+DELETE FROM 테이블명;
+테이블 안에 있는 내용을 모두 삭제
+
+DELETE FROM 테이블명
+WHERE 컬럼명 = 삭제할컬럼값;
+--> 테이블 안에서 특정한 컬럼값에 해당하는 줄을 모두 삭제
+
+-- 완전 삭제 --> COMMIT
+
+-- 되돌리기 --> ROLLBACK
+
+주의할점 :
+DELETE는 테이블 안에 있는 내용을 삭제
+DROP은 테이블 자체를 삭제
+******/
 
 
 
