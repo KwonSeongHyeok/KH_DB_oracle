@@ -184,6 +184,87 @@ JOIN과 FROM에서 테이블을 설정할 때
 
 
 
+-- ***** OUTER JOIN ***** --
+-- 두 테이블의 지정하는 컬럼값이 일치하지 않는 행도
+-- 조인에 포함 시킴
+
+-- OUTER JOIN과 비교할 INNER JOIN 쿼리문
+
+SELECT EMP_NAME, DEPT_CODE
+FROM EMPLOYEE
+/*INNER*/ JOIN department ON (DEPT_CODE = DEPT_ID);
+
+-- 1) LEFT [OUTER] JOIN
+-- 합치기에 사용한 두 테이블 중에서 왼쪽 편에 작성된 테이블의
+-- 컬럼수를 기준으로 JOIN
+
+-- ANSI 표준
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE LEFT JOIN department ON  (DEPT_CODE = DEPT_ID);
+--> JOIN 구문 기준으로 왼쪽에 작성된 테이블의
+---> 모든 행의 최종 결과(RESULT SET)에 포함되도록 하는 JOIN
+
+-- ORACLE
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE, DEPARTMENT
+WHERE DEPT_CODE = DEPT_ID(+);
+-- DEPT_CODE와 DEPT_ID값이 일치하지 않아도
+-- 왼쪽에 있는 컬럼에 수에 맞게 표시를 넣어라 (NULL 값이라도 넣어라)
+
+
+-- 2) RIGHT [OUTER] JOIN
+-- 합치기에 사용한 두 테이블 중에서 오른쪽 편에 작성된 테이블의
+-- 컬럼수를 기준으로 JOIN
+
+-- ANSI 표준
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE RIGHT JOIN department ON  (DEPT_CODE = DEPT_ID);
+--> JOIN 구문 기준으로 오른쪽에 작성된 테이블의
+---> 모든 행의 최종 결과(RESULT SET)에 포함되도록 하는 JOIN
+
+-- ORACLE
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE, DEPARTMENT
+WHERE DEPT_CODE(+) = DEPT_ID;
+-- DEPT_CODE와 DEPT_ID값이 일치하지 않아도
+-- 오른쪽에 있는 컬럼에 수에 맞게 표시를 넣어라 (NULL 값이라도 넣어라)
+
+
+
+-- 3) FULL [OUTER] JOIN
+-- 합치기에 사용한 두 테이블이 가진 모든 행을 결과에 표함
+--> 오라클에서는 FULL OUTER JOIN 구문 사용 불가
+
+-- ANSI 표준
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE FULL JOIN department ON  (DEPT_CODE = DEPT_ID);
+--> JOIN 구문 기준으로 양쪽에 작성된 테이블의
+---> 모든 행의 최종 결과(RESULT SET)에 포함되도록 하는 JOIN
+
+-- ORACLE
+SELECT EMP_NAME, DEPT_TITLE
+FROM EMPLOYEE, DEPARTMENT
+WHERE DEPT_CODE(+) = DEPT_ID(+);
+-- DEPT_CODE와 DEPT_ID값이 일치하지 않아도
+-- 오른쪽에 있는 컬럼에 수에 맞게 표시를 넣어라 (NULL 값이라도 넣어라)
+/*
+ORA-01468: a predicate may reference only one outer-joined table
+01468. 00000 -  "a predicate may reference only one outer-joined table"
+*Cause:    
+*Action:
+247행, 20열에서 오류 발생
+*/
+
+
+
+
+
+
+
+
+
+
+
 
 
 
